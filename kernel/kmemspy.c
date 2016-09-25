@@ -52,7 +52,7 @@ static int kmemspy_read_page_virt(void __user *argp)
 	down_read(&mm->mmap_sem);
 
 	if (get_user_pages_remote(NULL, mm, args.pfn_virt << PAGE_SHIFT, 1, 0,
-				  0, &page, &vma) < 0) {
+				  0, &page, &vma) <= 0) {
 		up_read(&mm->mmap_sem);
 		mmput(mm);
 		return -EINVAL;
